@@ -1,0 +1,17 @@
+{
+  "name": "wf-intelligence-hub-rag",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "migration:show": "node scripts/show-migration.js",
+    "migration:apply": "node scripts/apply-migration.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2"
+  }
+}

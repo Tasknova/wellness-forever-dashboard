@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WF RAG Agent — Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --accent: #1e3a5f;
+      --blue: #2b6cb0;
+      --light-bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #1a1a1a;
+      --muted: #64748b;
+      --green: #059669;
+      --red: #dc2626;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--light-bg);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 10px;
+    }
+
+    .header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .header p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message {
+      display: flex;
+      gap: 0.8rem;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message.assistant {
+      justify-content: flex-start;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .message.user .avatar {
+      background: var(--blue);
+      color: white;
+    }
+
+    .message.assistant .avatar {
+      background: var(--green);
+      color: white;
+    }
+
+    .content {
+      max-width: 70%;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    .message.user .content {
+      background: var(--blue);
+      color: white;
+    }
+
+    .message.assistant .content {
+      background: #f1f5f9;
+      color: var(--text);
+    }
+
+    .citations {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .citation-item {
+      display: block;
+      margin: 0.3rem 0;
+    }
+
+    .confidence {
+      font-size: 0.75rem;
+      color: var(--green);
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .loading {
+      display: flex;
+      gap: 0.3rem;
+      padding: 0.8rem 1rem;
+    }
+
+    .loading span {
+      width: 6px;
+      height: 6px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: blink 1.4s infinite;
+    }
+
+    .loading span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes blink {
+      0%, 60%, 100% {
+        opacity: 0.3;
+      }
+      30% {
+        opacity: 1;
+      }
+    }
+
+    .input-area {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .input-wrapper {
+      flex: 1;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+    }
+
+    input:disabled {
+      background: #f5f5f5;
+      cursor: not-allowed;
+    }
+
+    button {
+      padding: 0.75rem 1.2rem;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 0.9rem;
+    }
+
+    button:hover {
+      background: var(--accent);
+    }
+
+    button:disabled {
+      background: var(--muted);
+      cursor: not-allowed;
+    }
+
+    .status {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .status.error {
+      color: var(--red);
+      background: rgba(220, 38, 38, 0.05);
+      border-radius: 6px;
+    }
+
+    .status.success {
+      color: var(--green);
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      padding: 1rem 0;
+    }
+
+    .example-btn {
+      padding: 0.8rem;
+      background: #f1f5f9;
+      color: #111111;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .example-btn:hover {
+      background: var(--light-bg);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Wellness Forever RAG Agent</h1>
+      <p>Ask questions about vendors, accounts, operations, and strategy</p>
+    </div>
+
+    <div class="chat-area" id="chatArea">
+      <div style="text-align: center; padding: 2rem 1rem; color: var(--text);">
+        <p style="margin-bottom: 1.5rem;">💡 Try asking:</p>
+        <div class="examples">
+          <button class="example-btn" onclick="sendQuestion('What is Cipla'\''s vendor score?')">
+            Cipla vendor score
+          </button>
+          <button class="example-btn" onclick="sendQuestion('Which vendor is our biggest risk?')">
+            Biggest vendor risk
+          </button>
+          <button class="example-btn" onclick="sendQuestion('How are we doing with our IPO readiness?')">
+            IPO readiness status
+          </button>
+          <button class="example-btn" onclick="sendQuestion('What are our top revenue categories?')">
+            Top revenue categories
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="questionInput"
+          placeholder="Ask about vendors, accounts, operations..."
+          onkeypress="if(event.key==='Enter') sendQuestion()"
+          autocomplete="off"
+        />
+        <button onclick="sendQuestion()" id="sendBtn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:8080';
+    const chatArea = document.getElementById('chatArea');
+    const questionInput = document.getElementById('questionInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    let isLoading = false;
+
+    async function sendQuestion(predefinedQuestion = null) {
+      const question = predefinedQuestion || questionInput.value.trim();
+
+      if (!question) {
+        alert('Please enter a question');
+        return;
+      }
+
+      if (isLoading) return;
+
+      // Add user message
+      addMessage(question, 'user');
+      questionInput.value = '';
+
+      // Show loading indicator
+      isLoading = true;
+      sendBtn.disabled = true;
+      questionInput.disabled = true;
+      const loadingId = addLoadingIndicator();
+
+      try {
+        const response = await fetch(`${API_BASE}/ask`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Remove loading indicator
+        removeElement(loadingId);
+
+        // Add assistant response
+        addMessage(data.answer, 'assistant', data.confidence, data.citations);
+      } catch (error) {
+        removeElement(loadingId);
+        addMessage(`Error: ${error.message}`, 'assistant', 0, []);
+        console.error(error);
+      } finally {
+        isLoading = false;
+        sendBtn.disabled = false;
+        questionInput.disabled = false;
+        questionInput.focus();
+      }
+    }
+
+    function addMessage(text, role, confidence = null, citations = []) {
+      const messageEl = document.createElement('div');
+      messageEl.className = `message ${role}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = role === 'user' ? 'You' : 'WF';
+
+      const content = document.createElement('div');
+      content.className = 'content';
+      content.textContent = text;
+
+      if (confidence !== null && citations && citations.length > 0) {
+        const citationsEl = document.createElement('div');
+        citationsEl.className = 'citations';
+
+        const confEl = document.createElement('div');
+        confEl.className = 'confidence';
+        confEl.textContent = `Confidence: ${(confidence * 100).toFixed(0)}%`;
+        citationsEl.appendChild(confEl);
+
+        const citationLabel = document.createElement('div');
+        citationLabel.textContent = `Sources: ${citations.length} chunks`;
+        citationLabel.style.marginTop = '0.3rem';
+        citationsEl.appendChild(citationLabel);
+
+        citations.slice(0, 2).forEach((citation, idx) => {
+          const item = document.createElement('div');
+          item.className = 'citation-item';
+          item.textContent = `${idx + 1}. ${citation.sectionPath || 'Unknown section'}`;
+          citationsEl.appendChild(item);
+        });
+
+        if (citations.length > 2) {
+          const more = document.createElement('div');
+          more.className = 'citation-item';
+          more.textContent = `...and ${citations.length - 2} more`;
+          citationsEl.appendChild(more);
+        }
+
+        content.appendChild(citationsEl);
+      }
+
+      if (role === 'user') {
+        messageEl.appendChild(content);
+        messageEl.appendChild(avatar);
+      } else {
+        messageEl.appendChild(avatar);
+        messageEl.appendChild(content);
+      }
+
+      chatArea.appendChild(messageEl);
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function addLoadingIndicator() {
+      const messageEl = document.createElement('div');
+      messageEl.className = 'message assistant';
+      messageEl.id = `loading-${Date.now()}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = 'WF';
+
+      const loading = document.createElement('div');
+      loading.className = 'loading';
+      loading.innerHTML = '<span></span><span></span><span></span>';
+
+      messageEl.appendChild(avatar);
+      messageEl.appendChild(loading);
+
+      chatArea.appendChild(messageEl);
+      chatArea.scrollTop = chatArea.scrollHeight;
+
+      return messageEl.id;
+    }
+
+    function removeElement(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    // Focus input on load
+    window.addEventListener('load', () => {
+      questionInput.focus();
+    });
+  </script>
+</body>
+</html>

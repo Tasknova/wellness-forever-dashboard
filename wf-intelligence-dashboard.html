@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasknova — Wellness Forever AI Intelligence Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#fafaf9;--surface:#ffffff;--border:rgba(0,0,0,0.06);
+--text:#1a1a1a;--sub:#4b5563;--muted:#6b7280;
+--accent:#1e3a5f;--tn-blue:#2b6cb0;--tn-light:#ebf4ff;--tn-dark:#0f2440;
+--green:#059669;--green-bg:rgba(5,150,105,0.04);
+--red:#dc2626;--red-bg:rgba(220,38,38,0.03);
+--amber:#92400e;--amber-bg:#fffbeb;--gold:#b45309;
+--l1:#6366f1;--l2:#2b6cb0;--l3:#059669;--l4:#d97706;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:15px;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border);padding:1rem 0}
+nav .inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-weight:800;font-size:0.95rem;color:var(--accent);letter-spacing:-0.02em}
+nav .logo span{font-weight:400;color:var(--muted);font-size:0.78rem;margin-left:0.6rem}
+nav .links{display:flex;gap:1.5rem;list-style:none}
+nav .links a{color:var(--muted);text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;transition:color 0.2s}
+nav .links a:hover{color:var(--accent)}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}
+
+/* HERO */
+.hero{padding:6rem 0 5rem;text-align:center;border-bottom:1px solid var(--border)}
+.hero .tag{display:inline-block;font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--tn-blue);background:var(--tn-light);padding:0.3rem 0.8rem;border-radius:3px;margin-bottom:1.5rem}
+.hero h1{font-size:3rem;font-weight:800;letter-spacing:-0.03em;color:var(--accent);margin-bottom:1.2rem;line-height:1.15}
+.hero h1 em{font-style:normal;color:var(--tn-blue)}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:640px;margin:0 auto;line-height:1.7;font-weight:300}
+.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border)}
+.hero-metric .value{font-size:2.2rem;font-weight:700;color:var(--accent);letter-spacing:-0.02em}
+.hero-metric .value.blue{color:var(--tn-blue)}
+.hero-metric .value.green{color:var(--green)}
+.hero-metric .label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.3rem;font-weight:500}
+
+/* PULSE DOT */
+.status-bar{text-align:center;margin-top:2.5rem}
+.pulse-dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;margin-right:0.5rem;animation:pulse 2s infinite;vertical-align:middle}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,0.4)}50%{box-shadow:0 0 0 6px rgba(5,150,105,0)}}
+.status-bar span{font-size:0.75rem;color:var(--muted);font-weight:500}
+
+/* SECTIONS */
+section{padding:5rem 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+.section-header{margin-bottom:3.5rem}
+.eyebrow{font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--tn-blue);margin-bottom:0.8rem}
+.section-header h2{font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;color:var(--accent);margin-bottom:0.6rem}
+.section-header p{color:var(--muted);font-size:0.95rem;max-width:600px}
+
+/* ANALYSIS BOXES */
+.analysis{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.8rem 2rem;margin-top:1.5rem;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.analysis.tn{border-left:3px solid var(--tn-blue);background:var(--tn-light)}
+.analysis.risk{border-left:3px solid var(--red);background:var(--red-bg)}
+.analysis.opportunity{border-left:3px solid var(--green);background:var(--green-bg)}
+.analysis.amber{border-left:3px solid var(--amber);background:var(--amber-bg)}
+.analysis h4{font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.8rem}
+.analysis p{color:var(--muted);font-size:0.88rem;margin-bottom:0.6rem;line-height:1.75}
+.analysis ul{margin:0.8rem 0 0.8rem 1.2rem;color:var(--muted);font-size:0.86rem}
+.analysis li{margin-bottom:0.5rem;line-height:1.7}
+.analysis strong{color:var(--text);font-weight:600}
+.analysis em{color:var(--tn-blue);font-style:normal;font-weight:500}
+
+/* DATA GRID */
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.data-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+.data-grid.cols-4{grid-template-columns:1fr 1fr 1fr 1fr}
+.data-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.3rem 1.5rem}
+.data-card h4{font-size:0.76rem;font-weight:600;color:var(--tn-blue);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.05em}
+.data-card p{font-size:0.84rem;color:var(--muted);margin-bottom:0.3rem}
+.data-card .big{font-size:1.6rem;font-weight:700;color:var(--accent);margin-bottom:0.2rem}
+.data-card .big.red{color:var(--red)}
+.data-card .big.green{color:var(--green)}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:0.82rem;margin:1.2rem 0}
+th{padding:0.7rem 1rem;text-align:left;color:var(--muted);font-weight:600;font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;border-bottom:2px solid var(--border)}
+td{padding:0.7rem 1rem;border-bottom:1px solid var(--border);color:var(--sub)}
+tr:last-child td{border-bottom:none}
+tr:hover td{color:var(--text)}
+.map-table th{background:var(--accent);color:white;font-size:0.72rem;padding:0.8rem 1rem}
+.map-table th:first-child{border-radius:6px 0 0 0}
+.map-table th:last-child{border-radius:0 6px 0 0}
+.map-table td{padding:0.8rem 1rem;font-size:0.84rem}
+.map-table tr:nth-child(even){background:rgba(0,0,0,0.015)}
+
+/* WATERFALL */
+.waterfall{margin:2.5rem 0}
+.waterfall-bar{display:grid;grid-template-columns:180px 1fr 100px;gap:1rem;align-items:center;margin-bottom:0.6rem}
+.waterfall-bar .bar-label{font-size:0.82rem;font-weight:500;color:var(--sub);text-align:right}
+.waterfall-bar .bar-track{height:32px;background:rgba(0,0,0,0.03);border-radius:6px;position:relative;overflow:hidden}
+.waterfall-bar .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:0.8rem;font-size:0.72rem;font-weight:600;color:white;transition:width 0.8s ease}
+.waterfall-bar .bar-value{font-size:0.82rem;font-weight:600;color:var(--sub)}
+.bar-fill.l1{background:linear-gradient(90deg,#dc2626,#ef4444)}
+.bar-fill.l2{background:linear-gradient(90deg,#ea580c,#f97316)}
+.bar-fill.l3{background:linear-gradient(90deg,#d97706,#f59e0b)}
+.bar-fill.l4{background:linear-gradient(90deg,#ca8a04,#eab308)}
+.bar-fill.l5{background:linear-gradient(90deg,#2b6cb0,#3b82f6)}
+.bar-fill.l6{background:linear-gradient(90deg,#7c3aed,#8b5cf6)}
+.bar-fill.l7{background:linear-gradient(90deg,#6b7280,#9ca3af)}
+.waterfall-total{display:grid;grid-template-columns:180px 1fr 100px;gap:1rem;align-items:center;margin-top:0.8rem;padding-top:0.8rem;border-top:2px solid var(--accent)}
+.waterfall-total .bar-label{font-size:0.85rem;font-weight:700;color:var(--accent);text-align:right}
+.waterfall-total .bar-track{height:36px;background:rgba(30,58,95,0.06);border-radius:6px}
+.waterfall-total .bar-fill{background:linear-gradient(90deg,var(--accent),var(--tn-blue));height:100%;font-size:0.76rem;font-weight:700;border-radius:6px;display:flex;align-items:center;padding-left:0.8rem;color:white}
+.waterfall-total .bar-value{font-size:0.9rem;font-weight:700;color:var(--accent)}
+
+/* ARCHITECTURE FLOW */
+.arch-flow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr;gap:0;align-items:start;margin:2rem 0}
+.arch-layer{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;position:relative}
+.arch-layer .layer-badge{display:inline-block;width:36px;height:36px;border-radius:8px;line-height:36px;font-weight:800;font-size:0.9rem;color:white;margin-bottom:0.8rem}
+.arch-layer .layer-badge.b1{background:var(--l1)}
+.arch-layer .layer-badge.b2{background:var(--l2)}
+.arch-layer .layer-badge.b3{background:var(--l3)}
+.arch-layer .layer-badge.b4{background:var(--l4)}
+.arch-layer h4{font-size:0.82rem;font-weight:700;color:var(--accent);margin-bottom:0.6rem}
+.arch-layer ul{list-style:none;text-align:left;font-size:0.76rem;color:var(--muted)}
+.arch-layer li{padding:0.25rem 0;border-bottom:1px solid var(--border)}
+.arch-layer li:last-child{border-bottom:none}
+.arch-arrow{display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--tn-blue);font-weight:700;padding-top:2rem}
+
+/* MEMORY CARDS */
+.memory-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.memory-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.8rem;position:relative}
+.memory-card .mc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+.memory-card .mc-name{font-size:1.05rem;font-weight:700;color:var(--accent)}
+.memory-card .mc-type{font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.5rem;border-radius:3px;display:inline-block}
+.mc-type.hospital{background:var(--tn-light);color:var(--tn-blue)}
+.mc-type.clinic{background:var(--green-bg);color:var(--green)}
+.mc-type.corporate{background:var(--amber-bg);color:var(--amber)}
+.memory-card .mc-metrics{display:flex;gap:1.2rem;margin-bottom:1rem;flex-wrap:wrap}
+.mc-metric{font-size:0.75rem;color:var(--muted)}
+.mc-metric strong{color:var(--text);font-weight:600}
+.memory-card .mc-contacts{font-size:0.78rem;color:var(--muted);margin-bottom:0.8rem}
+.memory-card .mc-timeline{border-top:1px solid var(--border);padding-top:0.8rem;margin-top:0.5rem}
+.mc-timeline-item{display:flex;justify-content:space-between;font-size:0.74rem;padding:0.2rem 0}
+.mc-timeline-item .date{color:var(--muted);min-width:72px}
+.mc-timeline-item .event{color:var(--sub);flex:1}
+.churn-badge{display:inline-block;font-size:0.7rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:3px}
+.churn-badge.low{background:rgba(5,150,105,0.1);color:var(--green)}
+.churn-badge.moderate{background:rgba(43,108,176,0.1);color:var(--tn-blue)}
+.churn-badge.high{background:rgba(220,38,38,0.1);color:var(--red)}
+
+/* SENTIMENT INDICATOR */
+.sentiment{display:inline-flex;align-items:center;font-size:0.72rem;font-weight:600;gap:0.3rem}
+.sentiment.positive{color:var(--green)}
+.sentiment.negative{color:var(--red)}
+.sentiment.mixed{color:var(--amber)}
+
+/* SIGNAL CHAIN */
+.signal-chain{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.8rem 2rem;margin-bottom:1.5rem}
+.signal-chain h4{font-size:0.9rem;font-weight:700;color:var(--accent);margin-bottom:1.2rem}
+.chain-flow{display:flex;align-items:stretch;gap:0;margin:1rem 0}
+.chain-node{flex:1;padding:0.8rem;border-radius:8px;text-align:center;position:relative}
+.chain-node .node-label{font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem}
+.chain-node .node-text{font-size:0.78rem;font-weight:500;line-height:1.5}
+.chain-node.trigger{background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2)}
+.chain-node.trigger .node-label{color:var(--l1)}
+.chain-node.evidence{background:rgba(43,108,176,0.06);border:1px solid rgba(43,108,176,0.15)}
+.chain-node.evidence .node-label{color:var(--l2)}
+.chain-node.action{background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.15)}
+.chain-node.action .node-label{color:var(--l3)}
+.chain-node.impact{background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15)}
+.chain-node.impact .node-label{color:var(--l4)}
+.chain-arrow{display:flex;align-items:center;justify-content:center;width:32px;min-width:32px;color:var(--tn-blue);font-size:1rem;font-weight:700}
+
+/* AI LOG */
+.ai-log{background:#0f172a;border-radius:12px;padding:2rem;margin:2rem 0}
+.ai-log-header{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem}
+.ai-log-header .pulse-dot{animation:pulse 2s infinite}
+.ai-log-header span{color:rgba(255,255,255,0.6);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em}
+.ai-entry{margin-bottom:1.5rem}
+.ai-entry:last-child{margin-bottom:0}
+.ai-query{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem 1rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.6rem}
+.ai-query .q-badge{font-size:0.6rem;font-weight:700;text-transform:uppercase;color:#818cf8;letter-spacing:0.08em;min-width:40px}
+.ai-query .q-text{color:rgba(255,255,255,0.9);font-size:0.84rem;font-weight:500}
+.ai-response{background:rgba(43,108,176,0.1);border:1px solid rgba(43,108,176,0.15);border-radius:8px;padding:0.8rem 1rem;margin-left:1.5rem}
+.ai-response .r-badge{font-size:0.6rem;font-weight:700;text-transform:uppercase;color:#34d399;letter-spacing:0.08em;margin-bottom:0.4rem}
+.ai-response p{color:rgba(255,255,255,0.8);font-size:0.82rem;line-height:1.7}
+.ai-response strong{color:#93c5fd;font-weight:600}
+
+/* INTERVENTION CARDS */
+.intervention-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin:2rem 0}
+.intervention{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.8rem;display:grid;grid-template-columns:44px 1fr 140px 100px;gap:1.2rem;align-items:center}
+.intervention .rank{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:800;color:white;background:var(--accent)}
+.intervention .rank.urgent{background:var(--red)}
+.intervention .rank.high{background:var(--tn-blue)}
+.intervention .rank.medium{background:var(--muted)}
+.intervention .int-body h4{font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:0.2rem}
+.intervention .int-body p{font-size:0.78rem;color:var(--muted)}
+.intervention .int-roi{text-align:right}
+.intervention .int-roi .roi-value{font-size:1.1rem;font-weight:700;color:var(--green)}
+.intervention .int-roi .roi-label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+.urgency-badge{display:inline-block;font-size:0.65rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:3px;text-transform:uppercase;letter-spacing:0.05em}
+.urgency-badge.critical{background:rgba(220,38,38,0.1);color:var(--red)}
+.urgency-badge.high{background:rgba(43,108,176,0.1);color:var(--tn-blue)}
+.urgency-badge.medium{background:rgba(107,114,128,0.1);color:var(--muted)}
+.source-layers{font-size:0.68rem;color:var(--muted);margin-top:0.3rem}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--accent) 0%,var(--tn-blue) 100%);border-radius:16px;padding:4rem;margin:2rem 0;color:white;text-align:center}
+.cta-section h2{font-size:1.8rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;color:white}
+.cta-section p{font-size:1rem;opacity:0.85;max-width:500px;margin:0 auto 2rem;font-weight:300}
+.data-req{display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left;max-width:600px;margin:2rem auto}
+.data-req-item{background:rgba(255,255,255,0.12);border-radius:8px;padding:0.8rem 1rem;font-size:0.82rem;font-weight:500}
+.data-req-item .req-label{opacity:0.7;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.2rem}
+.cta-btn{display:inline-block;background:white;color:var(--accent);font-weight:700;font-size:0.9rem;padding:0.9rem 2.5rem;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;transition:transform 0.2s,box-shadow 0.2s}
+.cta-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+
+/* BRAIN SHOWCASE */
+.brain-section{background:linear-gradient(135deg,#0a0f1e 0%,#111827 40%,#0f172a 100%);padding:5rem 0;border-bottom:none;position:relative;overflow:hidden}
+.brain-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 20%,rgba(99,102,241,0.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(43,108,176,0.06) 0%,transparent 50%);pointer-events:none}
+.brain-section .section-header h2{color:white}
+.brain-section .section-header p{color:rgba(255,255,255,0.5)}
+.brain-section .eyebrow{color:#818cf8}
+
+/* Brain stats row */
+.brain-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:3rem}
+.brain-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.2rem;text-align:center;position:relative;overflow:hidden}
+.brain-stat::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px}
+.brain-stat:nth-child(1)::after{background:linear-gradient(90deg,#6366f1,#818cf8)}
+.brain-stat:nth-child(2)::after{background:linear-gradient(90deg,#2b6cb0,#60a5fa)}
+.brain-stat:nth-child(3)::after{background:linear-gradient(90deg,#059669,#34d399)}
+.brain-stat:nth-child(4)::after{background:linear-gradient(90deg,#d97706,#fbbf24)}
+.brain-stat:nth-child(5)::after{background:linear-gradient(90deg,#dc2626,#f87171)}
+.brain-stat .bs-value{font-size:1.8rem;font-weight:800;color:white;letter-spacing:-0.02em}
+.brain-stat .bs-label{font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem}
+
+/* Memory network viz */
+.memory-network{display:grid;grid-template-columns:280px 1fr;gap:2rem;margin-bottom:2.5rem}
+.network-map{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem;position:relative;min-height:340px}
+.net-node{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;cursor:default;transition:transform 0.3s,box-shadow 0.3s}
+.net-node:hover{transform:scale(1.15);z-index:10}
+.net-node.core{width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#4f46e5);top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.65rem;box-shadow:0 0 30px rgba(99,102,241,0.3),0 0 60px rgba(99,102,241,0.1)}
+.net-node.core:hover{transform:translate(-50%,-50%) scale(1.1)}
+.net-node.vendor{width:56px;height:56px;background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 0 20px rgba(37,99,235,0.2)}
+.net-node.account{width:52px;height:52px;background:linear-gradient(135deg,#059669,#047857);box-shadow:0 0 20px rgba(5,150,105,0.2)}
+.net-node.ops{width:48px;height:48px;background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 0 20px rgba(217,119,6,0.2)}
+.net-node.market{width:44px;height:44px;background:linear-gradient(135deg,#dc2626,#b91c1c);box-shadow:0 0 20px rgba(220,38,38,0.2)}
+.net-line{position:absolute;background:rgba(255,255,255,0.06);transform-origin:0 0}
+.network-legend{margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06)}
+.legend-item{display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;color:rgba(255,255,255,0.5);margin-bottom:0.4rem}
+.legend-dot{width:8px;height:8px;border-radius:50%}
+
+/* Brain capability cards */
+.brain-capabilities{display:grid;grid-template-columns:1fr;gap:0}
+.capability-group{border:1px solid rgba(255,255,255,0.06);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.cap-header{background:rgba(255,255,255,0.04);padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;cursor:pointer}
+.cap-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:white}
+.cap-icon.v{background:linear-gradient(135deg,#6366f1,#4f46e5)}
+.cap-icon.a{background:linear-gradient(135deg,#059669,#047857)}
+.cap-icon.x{background:linear-gradient(135deg,#d97706,#b45309)}
+.cap-icon.m{background:linear-gradient(135deg,#dc2626,#b91c1c)}
+.cap-icon.b{background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+.cap-title{font-size:0.82rem;font-weight:600;color:white;flex:1}
+.cap-count{font-size:0.68rem;color:rgba(255,255,255,0.35);font-weight:500}
+
+/* Brain chat showcase */
+.brain-chat{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;margin-top:2.5rem}
+.chat-titlebar{background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.6rem}
+.chat-dots{display:flex;gap:6px}
+.chat-dots span{width:10px;height:10px;border-radius:50%}
+.chat-dots span:nth-child(1){background:#ef4444}
+.chat-dots span:nth-child(2){background:#fbbf24}
+.chat-dots span:nth-child(3){background:#22c55e}
+.chat-title{font-size:0.75rem;color:rgba(255,255,255,0.5);font-weight:500;margin-left:0.5rem}
+.chat-status{margin-left:auto;display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:#34d399;font-weight:500}
+.chat-body{padding:1.5rem;max-height:none}
+.chat-msg{margin-bottom:1.2rem;display:flex;gap:0.8rem;align-items:flex-start}
+.chat-msg:last-child{margin-bottom:0}
+.chat-avatar{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:white;flex-shrink:0}
+.chat-avatar.user{background:linear-gradient(135deg,#6366f1,#4f46e5)}
+.chat-avatar.ai{background:linear-gradient(135deg,#059669,#047857)}
+.chat-bubble{max-width:85%;border-radius:10px;padding:0.8rem 1rem;font-size:0.82rem;line-height:1.7}
+.chat-bubble.user-bubble{background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.2);color:rgba(255,255,255,0.9)}
+.chat-bubble.ai-bubble{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.8)}
+.chat-bubble .ai-tag{display:inline-block;font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#34d399;background:rgba(52,211,153,0.1);padding:0.1rem 0.4rem;border-radius:3px;margin-bottom:0.5rem}
+.chat-bubble .layer-ref{display:inline-block;font-size:0.62rem;font-weight:600;padding:0.1rem 0.35rem;border-radius:3px;margin:0 0.1rem}
+.layer-ref.l1{background:rgba(99,102,241,0.15);color:#a5b4fc}
+.layer-ref.l2{background:rgba(43,108,176,0.15);color:#93c5fd}
+.layer-ref.l3{background:rgba(5,150,105,0.15);color:#6ee7b7}
+.layer-ref.l4{background:rgba(217,119,6,0.15);color:#fcd34d}
+.chat-bubble strong{color:#93c5fd;font-weight:600}
+.chat-bubble .metric-inline{color:#34d399;font-weight:600}
+.chat-bubble .risk-inline{color:#f87171;font-weight:600}
+
+/* Thinking animation */
+.thinking-dots{display:inline-flex;gap:4px;margin-left:0.3rem;vertical-align:middle}
+.thinking-dots span{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.3);animation:think 1.4s infinite}
+.thinking-dots span:nth-child(2){animation-delay:0.2s}
+.thinking-dots span:nth-child(3){animation-delay:0.4s}
+@keyframes think{0%,80%,100%{opacity:0.3;transform:scale(0.8)}40%{opacity:1;transform:scale(1.1)}}
+
+/* Typing cursor */
+.cursor{display:inline-block;width:2px;height:14px;background:#34d399;margin-left:2px;vertical-align:text-bottom;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* Brain neural scan bar */
+.neural-scan{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.2rem 1.5rem;margin-top:2rem}
+.scan-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.scan-title{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.7)}
+.scan-badge{font-size:0.62rem;font-weight:700;color:#34d399;background:rgba(52,211,153,0.1);padding:0.15rem 0.5rem;border-radius:3px;text-transform:uppercase;letter-spacing:0.06em}
+.scan-bars{display:grid;grid-template-columns:repeat(6,1fr);gap:0.8rem}
+.scan-bar{text-align:center}
+.scan-bar .sb-track{height:60px;background:rgba(255,255,255,0.03);border-radius:4px;position:relative;overflow:hidden;margin-bottom:0.4rem}
+.scan-bar .sb-fill{position:absolute;bottom:0;left:0;right:0;border-radius:4px;transition:height 0.8s ease}
+.scan-bar .sb-label{font-size:0.62rem;color:rgba(255,255,255,0.35);font-weight:500}
+.scan-bar .sb-value{font-size:0.72rem;color:white;font-weight:700;margin-bottom:0.2rem}
+
+/* FOOTER */
+footer{text-align:center;padding:4rem 2rem;color:var(--muted);font-size:0.75rem;letter-spacing:0.02em}
+footer strong{color:var(--accent)}
+
+/* BADGE */
+.confidence-badge{display:inline-block;font-size:0.68rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:3px;text-transform:uppercase;letter-spacing:0.05em}
+.confidence-badge.high{background:rgba(5,150,105,0.1);color:var(--green)}
+.confidence-badge.medium{background:rgba(43,108,176,0.1);color:var(--tn-blue)}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(20px);animation:fadeUp 0.6s forwards}
+.fade-up:nth-child(1){animation-delay:0.1s}
+.fade-up:nth-child(2){animation-delay:0.15s}
+.fade-up:nth-child(3){animation-delay:0.2s}
+.fade-up:nth-child(4){animation-delay:0.25s}
+.fade-up:nth-child(5){animation-delay:0.3s}
+.fade-up:nth-child(6){animation-delay:0.35s}
+.fade-up:nth-child(7){animation-delay:0.4s}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.hero h1{font-size:2.2rem}
+.hero-metrics{grid-template-columns:repeat(2,1fr)}
+.data-grid,.memory-grid{grid-template-columns:1fr}
+.arch-flow{grid-template-columns:1fr;gap:0.5rem}
+.arch-arrow{transform:rotate(90deg);padding:0}
+nav .links{gap:0.8rem}
+nav .links a{font-size:0.65rem}
+.chain-flow{flex-direction:column}
+.chain-arrow{transform:rotate(90deg);width:auto;height:24px}
+.intervention{grid-template-columns:36px 1fr;gap:0.8rem}
+.intervention .int-roi,.intervention .urgency-badge{display:none}
+.waterfall-bar,.waterfall-total{grid-template-columns:120px 1fr 80px}
+.cta-section{padding:2.5rem 1.5rem}
+.data-req{grid-template-columns:1fr}
+.ai-response{margin-left:0}
+.brain-stats{grid-template-columns:repeat(2,1fr)}
+.memory-network{grid-template-columns:1fr}
+.network-map{min-height:220px}
+.scan-bars{grid-template-columns:repeat(3,1fr)}
+.chat-bubble{max-width:95%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav><div class="inner">
+<div class="logo">Tasknova<span>Intelligence Platform</span></div>
+<ul class="links">
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#accounts">Accounts</a></li>
+<li><a href="#vendors">Vendors</a></li>
+<li><a href="#crosslayer">Cross-Layer</a></li>
+<li><a href="#revenue">Revenue</a></li>
+<li><a href="#demand">Demand</a></li>
+<li><a href="#brain">AI Brain</a></li>
+<li><a href="#actions">Actions</a></li>
+</ul>
+</div></nav>
+
+<!-- HERO -->
+<div class="container">
+<div class="hero" id="overview">
+<div class="tag">Multi-Layer Intelligence Platform</div>
+<h1>Wellness Forever <em>AI Intelligence Hub</em></h1>
+<p>4-layer intelligence architecture powering 300+ pharmacy stores across Maharashtra, Goa, and Karnataka — with vendor memory, account memory, and cross-layer insight generation.</p>
+<div class="hero-metrics">
+<div class="hero-metric fade-up">
+<div class="value">₹847Cr</div>
+<div class="label">Annual Revenue (FY26E)</div>
+</div>
+<div class="hero-metric fade-up">
+<div class="value blue">4</div>
+<div class="label">Intelligence Layers Active</div>
+</div>
+<div class="hero-metric fade-up">
+<div class="value">6</div>
+<div class="label">Vendor Profiles Tracked</div>
+</div>
+<div class="hero-metric fade-up">
+<div class="value green">23</div>
+<div class="label">Active Interventions</div>
+</div>
+</div>
+<div class="status-bar">
+<span class="pulse-dot"></span>
+<span>System active — Last sync: 26 Apr 2026, 14:32 IST</span>
+</div>
+</div>
+</div>
+
+<!-- SECTION 1: ARCHITECTURE -->
+<div class="container">
+<section id="architecture">
+<div class="section-header">
+<div class="eyebrow">System Architecture</div>
+<h2>4-Layer Intelligence Architecture</h2>
+<p>Each layer captures a distinct intelligence dimension. Cross-layer connections generate insights no single layer can produce alone.</p>
+</div>
+
+<div class="arch-flow fade-up">
+<div class="arch-layer">
+<div class="layer-badge b1">1</div>
+<h4>Vendor Memory</h4>
+<ul>
+<li>Order history &amp; pricing</li>
+<li>Reliability scorecards</li>
+<li>Negotiation memory</li>
+<li>Communication logs</li>
+</ul>
+</div>
+<div class="arch-arrow">→</div>
+<div class="arch-layer">
+<div class="layer-badge b2">2</div>
+<h4>Operations Intelligence</h4>
+<ul>
+<li>Demand forecasting</li>
+<li>Stockout analysis</li>
+<li>Co-purchase patterns</li>
+<li>Seasonal indices</li>
+</ul>
+</div>
+<div class="arch-arrow">→</div>
+<div class="arch-layer">
+<div class="layer-badge b3">3</div>
+<h4>Account &amp; Store Memory</h4>
+<ul>
+<li>Account health scores</li>
+<li>Store performance tiers</li>
+<li>Interaction timelines</li>
+<li>Churn risk signals</li>
+</ul>
+</div>
+<div class="arch-arrow">→</div>
+<div class="arch-layer">
+<div class="layer-badge b4">4</div>
+<h4>Market Intelligence</h4>
+<ul>
+<li>Competitor tracking</li>
+<li>Regulatory signals</li>
+<li>Category trends</li>
+<li>Digital disruption</li>
+</ul>
+</div>
+</div>
+
+<div class="analysis tn">
+<h4>Cross-Layer Intelligence Flow</h4>
+<p>When <strong>Cipla announces plant maintenance</strong> (Layer 1), the system automatically checks <strong>seasonal demand models</strong> (Layer 2), identifies <strong>at-risk stores in monsoon zones</strong> (Layer 3), and monitors <strong>competitor preparedness</strong> (Layer 4) — generating a pre-emptive stockout prevention plan <em>weeks before impact</em>.</p>
+</div>
+</section>
+</div>
+
+<!-- SECTION 2: ACCOUNT MEMORY -->
+<div class="container">
+<section id="accounts">
+<div class="section-header">
+<div class="eyebrow">Layer 3 — Account Memory</div>
+<h2>Institutional Account Intelligence</h2>
+<p>Deep relationship memory across hospital chains, clinic networks, and corporate wellness programs with real-time churn detection.</p>
+</div>
+
+<div class="memory-grid">
+<!-- Apollo -->
+<div class="memory-card fade-up">
+<div class="mc-header">
+<div>
+<div class="mc-name">Apollo Hospitals — Mumbai</div>
+<span class="mc-type hospital">Hospital Chain</span>
+</div>
+<span class="churn-badge moderate">22% Churn Risk</span>
+</div>
+<div class="mc-metrics">
+<div class="mc-metric"><strong>₹12.4Cr</strong> annual volume</div>
+<div class="mc-metric"><strong>94.8%</strong> OTD</div>
+<div class="mc-metric"><strong>7.8/10</strong> satisfaction</div>
+</div>
+<div class="mc-contacts">
+<strong>Key:</strong> Dr. Sunita Reddy (Pharmacy Director) · Anil Mathew (Procurement)<br>
+<strong>Prefs:</strong> Branded cardiac/onco, 9-month min shelf life, batch traceability
+</div>
+<div class="mc-timeline">
+<div class="mc-timeline-item"><span class="date">Apr 22</span><span class="event">Anil flagged 2 late deliveries — investigating</span></div>
+<div class="mc-timeline-item"><span class="date">Mar 28</span><span class="event">Q4 QBR: 7.8/10 satisfaction, payment terms discussed</span></div>
+<div class="mc-timeline-item"><span class="date">Mar 15</span><span class="event">Pricing dispute on cardiac range — matched competitor</span></div>
+</div>
+</div>
+
+<!-- Fortis -->
+<div class="memory-card fade-up" style="border-left:3px solid var(--red)">
+<div class="mc-header">
+<div>
+<div class="mc-name">Fortis Healthcare — Pune</div>
+<span class="mc-type hospital">Hospital Chain</span>
+</div>
+<span class="churn-badge high">41% Churn Risk ↑</span>
+</div>
+<div class="mc-metrics">
+<div class="mc-metric"><strong>₹8.7Cr</strong> annual volume</div>
+<div class="mc-metric"><strong style="color:var(--red)">88.3%</strong> OTD</div>
+<div class="mc-metric"><strong style="color:var(--red)">5.8/10</strong> satisfaction</div>
+</div>
+<div class="mc-contacts">
+<strong>Key:</strong> Rahul Deshpande (Procurement — adversarial) · Dr. Meera Joshi (Pharmacist)<br>
+<strong>⚠ Alert:</strong> Revenue declining 2 consecutive years. MedPlus gaining share.
+</div>
+<div class="mc-timeline">
+<div class="mc-timeline-item"><span class="date">Apr 20</span><span class="event" style="color:var(--red)">Rahul: "Match MedPlus or we shift 40% volume"</span></div>
+<div class="mc-timeline-item"><span class="date">Mar 25</span><span class="event" style="color:var(--red)">3 late deliveries; surgery prep affected</span></div>
+<div class="mc-timeline-item"><span class="date">Feb 28</span><span class="event" style="color:var(--red)">QBR: 5.8/10 — "MedPlus is hungrier"</span></div>
+</div>
+</div>
+
+<!-- LifeCare -->
+<div class="memory-card fade-up">
+<div class="mc-header">
+<div>
+<div class="mc-name">LifeCare Diagnostics</div>
+<span class="mc-type clinic">Clinic Network</span>
+</div>
+<span class="churn-badge low">12% Churn Risk</span>
+</div>
+<div class="mc-metrics">
+<div class="mc-metric"><strong>₹3.2Cr</strong> annual volume</div>
+<div class="mc-metric"><strong>96.8%</strong> OTD</div>
+<div class="mc-metric"><strong>8.9/10</strong> satisfaction</div>
+</div>
+<div class="mc-contacts">
+<strong>Key:</strong> Dr. Arun Bhat (CEO) · Sneha Patil (Operations)<br>
+<strong>Growth:</strong> 3 new Thane locations opening — ₹40-50L additional volume
+</div>
+<div class="mc-timeline">
+<div class="mc-timeline-item"><span class="date">Apr 15</span><span class="event" style="color:var(--green)">Dr. Bhat expanding to 3 new Thane locations</span></div>
+<div class="mc-timeline-item"><span class="date">Mar 20</span><span class="event" style="color:var(--green)">Q4 review: "Best pharmacy supplier we've worked with"</span></div>
+</div>
+</div>
+
+<!-- TCS -->
+<div class="memory-card fade-up">
+<div class="mc-header">
+<div>
+<div class="mc-name">TCS Corporate Wellness</div>
+<span class="mc-type corporate">Corporate</span>
+</div>
+<span class="churn-badge low">8% Churn Risk</span>
+</div>
+<div class="mc-metrics">
+<div class="mc-metric"><strong>₹1.8Cr</strong> annual volume</div>
+<div class="mc-metric"><strong>98.3%</strong> OTD</div>
+<div class="mc-metric"><strong>9.2/10</strong> satisfaction</div>
+</div>
+<div class="mc-contacts">
+<strong>Key:</strong> Ramesh Iyer (Head of Wellness) · Divya Nair (Coordinator)<br>
+<strong>Pipeline:</strong> Pune campus (₹80L-1Cr) + Bengaluru campus (₹60-80L)
+</div>
+<div class="mc-timeline">
+<div class="mc-timeline-item"><span class="date">Apr 18</span><span class="event" style="color:var(--green)">Pune campus expansion proposed — ₹80L-1Cr potential</span></div>
+<div class="mc-timeline-item"><span class="date">Mar 30</span><span class="event">Q4 health camps scheduled — wellness kits needed</span></div>
+</div>
+</div>
+</div>
+
+<div class="analysis risk">
+<h4>⚠ Fortis Healthcare — Intervention Required</h4>
+<p><strong>Churn risk increased from 31% → 41%</strong> over two quarters. Revenue declining, satisfaction at 5.8/10, key contact benchmarking against MedPlus. Rescue plan activated: price matching top 20 antibiotics (₹12L annual cost), dedicated logistics coordinator, CFO executive engagement. <em>If unactioned, 60%+ probability of losing 50% of Fortis volume = ₹4.3Cr annual revenue loss.</em></p>
+</div>
+</section>
+</div>
+
+<!-- SECTION 3: VENDOR MEMORY -->
+<div class="container">
+<section id="vendors">
+<div class="section-header">
+<div class="eyebrow">Layer 1 — Vendor Memory</div>
+<h2>Vendor Intelligence & Scorecards</h2>
+<p>Deep relationship memory across 6 strategic vendors — order history, negotiation context, reliability tracking, and communication logs.</p>
+</div>
+
+<div style="overflow-x:auto">
+<table class="map-table fade-up">
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Tier</th>
+<th>FY26E (₹ Cr)</th>
+<th>Fill Rate</th>
+<th>Lead Time</th>
+<th>Overall Score</th>
+<th>Trend</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cipla Ltd.</strong></td>
+<td><span class="confidence-badge high">Tier 1</span></td>
+<td>53.4</td>
+<td>95.7%</td>
+<td>3.6 days</td>
+<td><strong>8.24</strong></td>
+<td style="color:var(--green)">↑</td>
+</tr>
+<tr>
+<td><strong>Sun Pharma</strong></td>
+<td><span class="confidence-badge high">Tier 1</span></td>
+<td>49.1</td>
+<td>92.9%</td>
+<td>4.3 days</td>
+<td><strong>7.98</strong></td>
+<td>→</td>
+</tr>
+<tr>
+<td><strong>Dr. Reddy's</strong></td>
+<td><span class="confidence-badge medium">Tier 2</span></td>
+<td>25.7</td>
+<td>95.1%</td>
+<td>3.7 days</td>
+<td><strong>8.24</strong></td>
+<td style="color:var(--green)">↑</td>
+</tr>
+<tr>
+<td><strong>Lupin Ltd.</strong></td>
+<td><span class="confidence-badge medium">Tier 2</span></td>
+<td>19.6</td>
+<td>92.6%</td>
+<td>4.5 days</td>
+<td><strong>7.62</strong></td>
+<td style="color:var(--red)">↓</td>
+</tr>
+<tr>
+<td><strong>Zydus Lifesciences</strong></td>
+<td>Tier 3</td>
+<td>15.1</td>
+<td>93.8%</td>
+<td>4.1 days</td>
+<td><strong>7.78</strong></td>
+<td>→</td>
+</tr>
+<tr>
+<td style="color:var(--red)"><strong>Mankind Pharma ⚠</strong></td>
+<td style="color:var(--red)">Under Review</td>
+<td style="color:var(--red)">10.9</td>
+<td style="color:var(--red)"><strong>85.2%</strong></td>
+<td style="color:var(--red)">6.1 days</td>
+<td style="color:var(--red)"><strong>6.74</strong></td>
+<td style="color:var(--red)">↓↓</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Cipla Detail Card -->
+<div class="memory-grid">
+<div class="memory-card fade-up">
+<div class="mc-header">
+<div>
+<div class="mc-name">Cipla Ltd.</div>
+<span class="confidence-badge high">Strategic Partner</span>
+</div>
+<div class="sentiment positive">● Positive Trend</div>
+</div>
+<div class="mc-metrics">
+<div class="mc-metric"><strong>₹53.4Cr</strong> FY26E</div>
+<div class="mc-metric"><strong>211</strong> SKUs</div>
+<div class="mc-metric"><strong>Score 8.24</strong> ↑</div>
+</div>
+<div class="mc-contacts">
+<strong>Contact:</strong> Rohit Bansal (RSM) — professional, data-responsive, 24h replies<br>
+<strong>Top SKUs:</strong> Azithromycin 500mg, Foracort 200, Alex syrup, Omnigel, Nicotex
+</div>
+<div class="mc-timeline">
+<div class="mc-timeline-item"><span class="date">Apr 12</span><span class="event">FY27 terms call — Cipla hinting at respiratory exclusive</span></div>
+<div class="mc-timeline-item"><span class="date">Mar 15</span><span class="event">QBR: "WF is our fastest-growing chain partner in West India"</span></div>
+<div class="mc-timeline-item"><span class="date">Feb 26</span><span class="event">85K Azithromycin strips pre-positioned for monsoon</span></div>
+<div class="mc-timeline-item"><span class="date">Jan 18</span><span class="event">Private label contract manufacturing discussion initiated</span></div>
+</div>
+</div>
+
+<!-- Sun Pharma Detail Card -->
+<div class="memory-card fade-up">
+<div class="mc-header">
+<div>
+<div class="mc-name">Sun Pharmaceutical</div>
+<span class="confidence-badge high">Strategic Partner</span>
+</div>
+<div class="sentiment mixed">● Mixed Signals</div>
+</div>
+<div class="mc-metrics">
+<div class="mc-metric"><strong>₹49.1Cr</strong> FY26E</div>
+<div class="mc-metric"><strong>174</strong> SKUs</div>
+<div class="mc-metric"><strong>Score 7.98</strong> →</div>
+</div>
+<div class="mc-contacts">
+<strong>Contact:</strong> Amit Verma (NKAM) — formal, process-driven, 48-72h replies<br>
+<strong>Top SKUs:</strong> Volini, Pantocid 40mg, Revital H, Folvite, Absorica
+</div>
+<div class="mc-timeline">
+<div class="mc-timeline-item"><span class="date">Apr 3</span><span class="event">QBR: Fill rate 2pts below Cipla — improvement plan demanded</span></div>
+<div class="mc-timeline-item"><span class="date">Mar 26</span><span class="event">Volini Patch exclusive — 30% margin, 45-day window agreed</span></div>
+<div class="mc-timeline-item"><span class="date">Feb 22</span><span class="event">Karnataka logistics review — BlueDart pilot approved</span></div>
+</div>
+</div>
+</div>
+
+<div class="analysis risk">
+<h4>⚠ Mankind Pharma — Vendor Under Review</h4>
+<p><strong>Fill rate collapsed to 85.2%</strong> (worst in top 20 vendors). Lead times at 6.1 days. Orders declining 26% YoY. Formal PIP issued with Jun 30 deadline. WF actively sourcing alternatives for Manforce and Prega News from TTK Healthcare and HLL. Mankind appointed new regional head (Sunil Pandey) effective May 1. <em>"Actions, not promises. We've heard this before."</em> — Deepak Joshi, Head of Supply Chain.</p>
+</div>
+</section>
+</div>
+
+<!-- SECTION 4: CROSS-LAYER INSIGHTS -->
+<div class="container">
+<section id="crosslayer">
+<div class="section-header">
+<div class="eyebrow">Cross-Layer Intelligence</div>
+<h2>Signal Chain Analysis</h2>
+<p>When signals from different layers converge, the system generates actionable insights with predicted impact and recommended interventions.</p>
+</div>
+
+<!-- Signal Chain 1 -->
+<div class="signal-chain fade-up">
+<h4>Signal Chain #1: Vendor Failure Cascade</h4>
+<div class="chain-flow">
+<div class="chain-node trigger">
+<div class="node-label">Trigger — Layer 1</div>
+<div class="node-text">Mankind fill rate drops below 88% for 2nd consecutive month</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node evidence">
+<div class="node-label">Evidence — Layer 2+3</div>
+<div class="node-text">120+ stores affected. OTC brand substitution rate spiking. TCS campus Prega News stockout during health camp.</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node action">
+<div class="node-label">Action</div>
+<div class="node-text">Formal PIP issued. Alternative sourcing from TTK/HLL initiated. Orders reduced 26% YoY.</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node impact">
+<div class="node-label">Impact</div>
+<div class="node-text"><strong>₹18L/month</strong> revenue protected. Jun 30 deadline for improvement or vendor downgrade.</div>
+</div>
+</div>
+</div>
+
+<!-- Signal Chain 2 -->
+<div class="signal-chain fade-up">
+<h4>Signal Chain #2: Seasonal Demand Miss Prevention</h4>
+<div class="chain-flow">
+<div class="chain-node trigger">
+<div class="node-label">Trigger — Layer 1</div>
+<div class="node-text">Cipla Patalganga plant maintenance scheduled Jul 1-15</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node evidence">
+<div class="node-label">Evidence — Layer 2</div>
+<div class="node-text">Seasonal model: 42% antibiotic surge Jun-Aug. 85 Mumbai stores in highest monsoon-impact zone.</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node action">
+<div class="node-label">Action</div>
+<div class="node-text">Pre-ordered 85K Azithromycin strips 3 weeks early. DRL backup supply agreement activated.</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node impact">
+<div class="node-label">Impact</div>
+<div class="node-text"><strong>Zero stockouts</strong> during Jul 2025 monsoon peak. Competitors experienced 4-6 day gaps.</div>
+</div>
+</div>
+</div>
+
+<!-- Signal Chain 3 -->
+<div class="signal-chain fade-up">
+<h4>Signal Chain #3: Account Churn Early Warning</h4>
+<div class="chain-flow">
+<div class="chain-node trigger">
+<div class="node-label">Trigger — Layer 3</div>
+<div class="node-text">Fortis Q2 QBR satisfaction dropped 7.2 → 6.4</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node evidence">
+<div class="node-label">Evidence — Layer 1+4</div>
+<div class="node-text">Sun Pharma delivery issues affecting Fortis cardiac supply. MedPlus hired new institutional sales head for Pune.</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node action">
+<div class="node-label">Action</div>
+<div class="node-text">Account rescue: price matching, dedicated logistics coordinator, CFO executive engagement.</div>
+</div>
+<div class="chain-arrow">→</div>
+<div class="chain-node impact">
+<div class="node-label">Impact</div>
+<div class="node-text"><strong>₹4.3Cr</strong> annual revenue at risk. Decline slowed but not reversed. Churn risk still at 41%.</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- SECTION 5: REVENUE INTELLIGENCE -->
+<div class="container">
+<section id="revenue">
+<div class="section-header">
+<div class="eyebrow">Revenue Intelligence</div>
+<h2>7-Layer Revenue Leakage Framework</h2>
+<p>Comprehensive pharmacy-specific leakage analysis identifying ₹162.9Cr (19.22%) of revenue at risk across pricing, operations, and customer dimensions.</p>
+</div>
+
+<div class="waterfall fade-up">
+<div class="waterfall-bar">
+<div class="bar-label">Stockout Leakage</div>
+<div class="bar-track"><div class="bar-fill l1" style="width:21.9%">₹35.6Cr</div></div>
+<div class="bar-value">4.20%</div>
+</div>
+<div class="waterfall-bar">
+<div class="bar-label">Pricing Leakage</div>
+<div class="bar-track"><div class="bar-fill l2" style="width:21.0%">₹34.2Cr</div></div>
+<div class="bar-value">4.04%</div>
+</div>
+<div class="waterfall-bar">
+<div class="bar-label">Margin Erosion</div>
+<div class="bar-track"><div class="bar-fill l3" style="width:17.4%">₹28.4Cr</div></div>
+<div class="bar-value">3.35%</div>
+</div>
+<div class="waterfall-bar">
+<div class="bar-label">Customer Churn</div>
+<div class="bar-track"><div class="bar-fill l4" style="width:14.0%">₹22.8Cr</div></div>
+<div class="bar-value">2.69%</div>
+</div>
+<div class="waterfall-bar">
+<div class="bar-label">Operational Inefficiency</div>
+<div class="bar-track"><div class="bar-fill l5" style="width:11.5%">₹18.7Cr</div></div>
+<div class="bar-value">2.21%</div>
+</div>
+<div class="waterfall-bar">
+<div class="bar-label">Working Capital Drag</div>
+<div class="bar-track"><div class="bar-fill l6" style="width:9.1%">₹14.8Cr</div></div>
+<div class="bar-value">1.75%</div>
+</div>
+<div class="waterfall-bar">
+<div class="bar-label">Missed Revenue</div>
+<div class="bar-track"><div class="bar-fill l7" style="width:5.2%">₹8.4Cr</div></div>
+<div class="bar-value">0.99%</div>
+</div>
+<div class="waterfall-total">
+<div class="bar-label">Total Leakage</div>
+<div class="bar-track"><div class="bar-fill" style="width:100%">₹162.9Cr</div></div>
+<div class="bar-value">19.22%</div>
+</div>
+</div>
+
+<div class="data-grid">
+<div class="analysis tn">
+<h4>Top Recovery Opportunities</h4>
+<ul>
+<li><strong>Vendor consolidation</strong> (340→200 vendors) — ₹8-10Cr pricing improvement</li>
+<li><strong>ML demand forecasting</strong> — reduce stockout rate from 4.2% to &lt;2.5%</li>
+<li><strong>Category mix shift</strong> — Wellness from 15%→20% improves blended margin by 1.2pts</li>
+<li><strong>Generic substitution</strong> (Pantop model) — ₹22L/year per category expanded</li>
+</ul>
+</div>
+<div class="analysis opportunity">
+<h4>Recovery Plan Impact</h4>
+<p><strong>Target: ₹40-50Cr leakage reduction over 24 months.</strong></p>
+<ul>
+<li>EBITDA margin improvement: 6.2% → 8%+ (IPO threshold)</li>
+<li>Working capital cycle: 39 days → 35 days</li>
+<li>Every 1 day WC improvement = <em>₹2.3Cr cash flow</em></li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+
+<!-- SECTION 6: DEMAND INTELLIGENCE -->
+<div class="container">
+<section id="demand">
+<div class="section-header">
+<div class="eyebrow">Layer 2 — Operations Intelligence</div>
+<h2>Demand Intelligence & Patterns</h2>
+<p>Seasonal demand modeling, co-purchase patterns, and anomaly detection across 312 stores and 2,000+ SKUs.</p>
+</div>
+
+<div class="data-grid cols-4 fade-up">
+<div class="data-card">
+<h4>Chronic Rx</h4>
+<div class="big">42%</div>
+<p>of revenue</p>
+<p style="font-size:0.76rem;color:var(--green)">Near-flat demand (98-103 index). Predictable, anchor category.</p>
+</div>
+<div class="data-card">
+<h4>Seasonal Antibiotics</h4>
+<div class="big red">+48%</div>
+<p>monsoon peak (Aug)</p>
+<p style="font-size:0.76rem;color:var(--red)">Highest volatility. Stockout rate 6.8% — worst category.</p>
+</div>
+<div class="data-card">
+<h4>Wellness & Beauty</h4>
+<div class="big green">+35%</div>
+<p>festive season (Nov-Dec)</p>
+<p style="font-size:0.76rem;color:var(--green)">Highest margins (32-42%). Growth driver for category mix shift.</p>
+</div>
+<div class="data-card">
+<h4>Allergy / Respiratory</h4>
+<div class="big">+30%</div>
+<p>pre-monsoon (Apr-May)</p>
+<p style="font-size:0.76rem">Cetirizine & Montelukast spike. DRL allergy deal secured at 8% discount.</p>
+</div>
+</div>
+
+<div class="analysis amber">
+<h4>⚡ Anomaly Alert: Azithromycin Demand Spike Detected</h4>
+<p><strong>Seasonal model predicts 42% antibiotic surge Jun-Aug 2026.</strong> Cipla pre-positioning 85,000 strips at Bhiwandi warehouse by May 15. DRL Cetirizine secured (100K strips). Cross-store transfer protocol active: Goa (low demand) → Mumbai (peak demand). <em>Last year: zero stockouts during monsoon peak while competitors experienced 4-6 day gaps.</em></p>
+</div>
+
+<div class="analysis tn" style="margin-top:1.5rem">
+<h4>Co-Purchase Intelligence — Top Actionable Pairings</h4>
+<p><strong>23 high-confidence pairings identified</strong>, none currently activated at POS. Estimated revenue from cross-sell implementation: <em>₹8.4Cr annually</em>.</p>
+<ul>
+<li><strong>Insulin + Glucometer strips</strong> — 82% confidence, 5.1x lift</li>
+<li><strong>Diabetes strips + Lancets</strong> — 88% confidence, 6.2x lift (always stock together)</li>
+<li><strong>Prenatal vitamins + Iron/Folic Acid</strong> — 74% confidence, 4.5x lift</li>
+<li><strong>Metformin + Atorvastatin</strong> — 67% confidence, 3.2x lift (chronic care bundle)</li>
+<li><strong>Azithromycin + Paracetamol</strong> — 72% confidence, 2.8x lift (infection recovery pack)</li>
+</ul>
+</div>
+</section>
+</div>
+
+<!-- SECTION 7: AI BRAIN SHOWCASE -->
+<section class="brain-section" id="brain">
+<div class="container">
+<div class="section-header">
+<div class="eyebrow">Tasknova AI Brain</div>
+<h2>Institutional Memory &amp; Reasoning Engine</h2>
+<p>An AI that remembers every vendor call, every account interaction, every seasonal pattern — and connects them in real time.</p>
+</div>
+
+<!-- Brain Stats -->
+<div class="brain-stats fade-up">
+<div class="brain-stat">
+<div class="bs-value">1,847</div>
+<div class="bs-label">Memory Entries</div>
+</div>
+<div class="brain-stat">
+<div class="bs-value">312</div>
+<div class="bs-label">Stores Tracked</div>
+</div>
+<div class="brain-stat">
+<div class="bs-value">6</div>
+<div class="bs-label">Vendor Profiles</div>
+</div>
+<div class="brain-stat">
+<div class="bs-value">20</div>
+<div class="bs-label">Cross-Layer Insights</div>
+</div>
+<div class="brain-stat">
+<div class="bs-value">4</div>
+<div class="bs-label">Active Layers</div>
+</div>
+</div>
+
+<!-- Memory Network + Capabilities -->
+<div class="memory-network fade-up">
+<div class="brain-capabilities">
+
+<div class="capability-group">
+<div class="cap-header">
+<div class="cap-icon v">V</div>
+<div class="cap-title">Vendor Memory</div>
+<div class="cap-count">6 profiles &middot; 342 interactions &middot; 18 active threads</div>
+</div>
+</div>
+
+<div class="capability-group">
+<div class="cap-header">
+<div class="cap-icon a">A</div>
+<div class="cap-title">Account Memory</div>
+<div class="cap-count">4 accounts &middot; 68 interactions &middot; 6 QBR records</div>
+</div>
+</div>
+
+<div class="capability-group">
+<div class="cap-header">
+<div class="cap-icon b">S</div>
+<div class="cap-title">Store Intelligence</div>
+<div class="cap-count">312 stores &middot; 27 metrics/store &middot; 5 regions</div>
+</div>
+</div>
+
+<div class="capability-group">
+<div class="cap-header">
+<div class="cap-icon x">X</div>
+<div class="cap-title">Cross-Layer Insights</div>
+<div class="cap-count">20 insights &middot; 4-node evidence chains &middot; ROI-scored</div>
+</div>
+</div>
+
+<div class="capability-group">
+<div class="cap-header">
+<div class="cap-icon m">M</div>
+<div class="cap-title">Market Intelligence</div>
+<div class="cap-count">5 competitors &middot; 8 regulatory items &middot; 12 trend signals</div>
+</div>
+</div>
+
+</div>
+
+<!-- Network Map -->
+<div class="network-map">
+<!-- Core node -->
+<div class="net-node core" style="top:50%;left:50%">BRAIN</div>
+<!-- Vendor nodes -->
+<div class="net-node vendor" style="top:12%;left:18%">Cipla</div>
+<div class="net-node vendor" style="top:8%;left:55%">Sun</div>
+<div class="net-node vendor" style="top:18%;left:82%">DRL</div>
+<!-- Account nodes -->
+<div class="net-node account" style="top:78%;left:15%">Apollo</div>
+<div class="net-node account" style="top:85%;left:48%">Fortis</div>
+<div class="net-node account" style="top:75%;left:80%">TCS</div>
+<!-- Ops nodes -->
+<div class="net-node ops" style="top:42%;left:8%">Demand</div>
+<div class="net-node ops" style="top:58%;left:88%">Stock</div>
+<!-- Market nodes -->
+<div class="net-node market" style="top:38%;left:88%">MedPlus</div>
+<div class="net-node market" style="top:62%;left:5%">Apollo Rx</div>
+<!-- Legend -->
+<div class="network-legend" style="position:absolute;bottom:12px;left:12px;right:12px">
+<div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div> Core Brain</div>
+<div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div> Vendor Memory</div>
+<div class="legend-item"><div class="legend-dot" style="background:#059669"></div> Account Memory</div>
+<div class="legend-item"><div class="legend-dot" style="background:#d97706"></div> Operations</div>
+<div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div> Market Intel</div>
+</div>
+</div>
+</div>
+
+<!-- Neural Scan Bars -->
+<div class="neural-scan fade-up">
+<div class="scan-header">
+<div class="scan-title">Memory Depth &amp; Confidence by Domain</div>
+<div class="scan-badge"><span class="pulse-dot" style="width:6px;height:6px;margin-right:4px"></span> Live Scan</div>
+</div>
+<div class="scan-bars">
+<div class="scan-bar">
+<div class="sb-value">94%</div>
+<div class="sb-track"><div class="sb-fill" style="height:94%;background:linear-gradient(0deg,#4f46e5,#818cf8)"></div></div>
+<div class="sb-label">Vendor</div>
+</div>
+<div class="scan-bar">
+<div class="sb-value">88%</div>
+<div class="sb-track"><div class="sb-fill" style="height:88%;background:linear-gradient(0deg,#1d4ed8,#60a5fa)"></div></div>
+<div class="sb-label">Account</div>
+</div>
+<div class="scan-bar">
+<div class="sb-value">91%</div>
+<div class="sb-track"><div class="sb-fill" style="height:91%;background:linear-gradient(0deg,#047857,#34d399)"></div></div>
+<div class="sb-label">Store</div>
+</div>
+<div class="scan-bar">
+<div class="sb-value">86%</div>
+<div class="sb-track"><div class="sb-fill" style="height:86%;background:linear-gradient(0deg,#b45309,#fbbf24)"></div></div>
+<div class="sb-label">Demand</div>
+</div>
+<div class="scan-bar">
+<div class="sb-value">79%</div>
+<div class="sb-track"><div class="sb-fill" style="height:79%;background:linear-gradient(0deg,#b91c1c,#f87171)"></div></div>
+<div class="sb-label">Market</div>
+</div>
+<div class="scan-bar">
+<div class="sb-value">92%</div>
+<div class="sb-track"><div class="sb-fill" style="height:92%;background:linear-gradient(0deg,#6d28d9,#a78bfa)"></div></div>
+<div class="sb-label">Cross-Layer</div>
+</div>
+</div>
+</div>
+
+<!-- Brain Chat Showcase -->
+<div class="brain-chat fade-up">
+<div class="chat-titlebar">
+<div class="chat-dots"><span></span><span></span><span></span></div>
+<div class="chat-title">tasknova-brain — Wellness Forever Intelligence Session</div>
+<div class="chat-status"><span class="pulse-dot" style="width:6px;height:6px"></span> Connected</div>
+</div>
+<div class="chat-body">
+
+<!-- Conversation 1 -->
+<div class="chat-msg">
+<div class="chat-avatar user">VP</div>
+<div class="chat-bubble user-bubble">What's our situation with Cipla going into FY27 negotiations?</div>
+</div>
+<div class="chat-msg">
+<div class="chat-avatar ai">AI</div>
+<div class="chat-bubble ai-bubble">
+<div class="ai-tag">Multi-Layer Response</div>
+<strong>Strong position, with leverage.</strong> Cipla is our #1 vendor at <span class="metric-inline">₹53.4Cr FY26</span> (score 8.24/10, trending up). Arun Kapoor called us their <em>"fastest-growing chain partner in West India"</em> at the Mar QBR. <span class="layer-ref l1">L1 Vendor</span><br><br>
+Three negotiation cards to play: (1) Their pricing is <span class="risk-inline">3-4% above Sun Pharma</span> on overlapping SKUs — we have the data. (2) Our Zydus Pantop pilot proves we can substitute, so Pantocid exclusivity isn't guaranteed. (3) They want our volume commitment for 3 new respiratory exclusives — that's worth <span class="metric-inline">₹5-8Cr annually</span> to us. <span class="layer-ref l2">L2 Ops</span> <span class="layer-ref l4">L4 Market</span><br><br>
+<strong>Recommended ask:</strong> 4% flat discount (not tiered), quarterly settlement, respiratory exclusive with 30% margin, and flexible private label terms for WF Essentials cough range. Cipla needs us as much as we need them — their chain pharmacy channel is their growth story.
+</div>
+</div>
+
+<!-- Conversation 2 -->
+<div class="chat-msg" style="margin-top:2rem">
+<div class="chat-avatar user">VP</div>
+<div class="chat-bubble user-bubble">I'm worried about Fortis. What's the real picture and what should I do this week?</div>
+</div>
+<div class="chat-msg">
+<div class="chat-avatar ai">AI</div>
+<div class="chat-bubble ai-bubble">
+<div class="ai-tag">Cross-Layer Alert</div>
+<strong>Honest assessment: this account is in trouble.</strong> Churn risk at <span class="risk-inline">41% and rising</span>. Let me connect the dots: <span class="layer-ref l1">L1</span> <span class="layer-ref l3">L3</span> <span class="layer-ref l4">L4</span><br><br>
+<strong>Layer 1 (Vendor):</strong> Sun Pharma's 91.4% fill rate is directly causing delivery failures to Fortis — 3 late deliveries in March, one affected surgery prep.<br>
+<strong>Layer 3 (Account):</strong> Rahul Deshpande's email tone has shifted from collaborative to transactional. He forwarded a MedPlus quote on Apr 20 saying <em>"match or we shift 40% of volume."</em> Satisfaction: 5.8/10.<br>
+<strong>Layer 4 (Market):</strong> MedPlus hired a new institutional sales head for Pune. They're coming for this account.<br><br>
+<strong>This week's actions:</strong><br>
+1. Get Kavita (CFO) to call Fortis Pune Director — executive reset, not Anita alone<br>
+2. Price-match top 20 antibiotics today — ₹12L annual cost, but we're protecting ₹4.3Cr<br>
+3. Assign a dedicated logistics coordinator for Fortis orders — guarantee 95%+ OTD<br>
+4. Prepare response to centralized procurement RFI (due May 15) — emphasize batch traceability, which MedPlus can't match<br><br>
+<span class="risk-inline">If we lose 50% of Fortis volume, that's ₹4.3Cr gone — plus the signal it sends to Apollo and LifeCare.</span>
+</div>
+</div>
+
+<!-- Conversation 3 -->
+<div class="chat-msg" style="margin-top:2rem">
+<div class="chat-avatar user">VP</div>
+<div class="chat-bubble user-bubble">Give me the 3 things that will move the needle most for our IPO readiness.</div>
+</div>
+<div class="chat-msg">
+<div class="chat-avatar ai">AI</div>
+<div class="chat-bubble ai-bubble">
+<div class="ai-tag">Strategic Synthesis</div>
+I've run this across all four layers. Here are the three highest-impact moves: <span class="layer-ref l1">L1</span> <span class="layer-ref l2">L2</span> <span class="layer-ref l3">L3</span> <span class="layer-ref l4">L4</span><br><br>
+<strong>1. Category mix shift → margin transformation.</strong><br>
+Moving 5pts of revenue from FMCG (17.5% margin) and low-margin Rx into Wellness (36%) and Beauty (38.5%) adds <span class="metric-inline">1.2-1.5 EBITDA percentage points</span>. That's the difference between 6.2% and 7.5%+ EBITDA. The fitness corners (May launch), WF Essentials private label, and festive wellness campaigns are not nice-to-haves — they ARE the margin story.<br><br>
+<strong>2. Vendor consolidation → procurement savings + working capital.</strong><br>
+340 vendors → 200 by FY28 = <span class="metric-inline">₹8-10Cr</span> in pricing improvement plus 3-4 days off the working capital cycle. Every day = ₹2.3Cr cash flow. The Pantop substitution model alone saves ₹22L/year per category expanded. Scale that to 15 categories.<br><br>
+<strong>3. Digital prescription capture → customer lock-in.</strong><br>
+2,400 prescriptions captured in 2 months with 34% repeat conversion. This is our moat against PharmEasy/Tata 1mg, which are eroding <span class="risk-inline">8% of urban Rx customers</span>. Scale to 100 stores by Oct 2026 (CEO directive). Recurring Rx customers have 3.2x higher LTV than walk-ins.<br><br>
+<strong>Bottom line:</strong> These three moves together can take EBITDA from 6.2% to 8%+, reduce working capital to 35 days, and protect the Rx base. That's the IPO story.
+</div>
+</div>
+
+<!-- Conversation 4 -->
+<div class="chat-msg" style="margin-top:2rem">
+<div class="chat-avatar user">VP</div>
+<div class="chat-bubble user-bubble">Are we ready for monsoon season?</div>
+</div>
+<div class="chat-msg">
+<div class="chat-avatar ai">AI</div>
+<div class="chat-bubble ai-bubble">
+<div class="ai-tag">Operational Readiness Check</div>
+<strong>Yes — better than last year.</strong> Here's the full scan: <span class="layer-ref l1">L1</span> <span class="layer-ref l2">L2</span> <span class="layer-ref l3">L3</span><br><br>
+<strong>Demand model:</strong> Antibiotics +42% Jun-Aug (index 148 in Aug), Respiratory +35%. 85 Mumbai stores in highest monsoon-impact zone. <span class="layer-ref l2">L2</span><br><br>
+<strong>Inventory status:</strong><br>
+&bull; Cipla: 85,000 Azithromycin strips pre-positioned at Bhiwandi by May 15 ✓<br>
+&bull; DRL: 100,000 Cetirizine strips secured at 8% seasonal discount ✓<br>
+&bull; Cross-store transfer protocol: Goa (low monsoon demand) → Mumbai (peak) ✓<br>
+&bull; DRL Amoxicillin backup supply agreement: In place ✓<br><br>
+<strong>One concern:</strong> <span class="risk-inline">Mankind's Amoxicillin</span> is our #9 stockout SKU (3.1 days OOS/month). With their fill rate at 85.2%, I'd recommend pre-ordering from DRL as backup now — don't wait. <span class="layer-ref l1">L1</span><br><br>
+<strong>Last year result:</strong> Zero monsoon stockouts while competitors had 4-6 day gaps. Targeting same or better this year.
+</div>
+</div>
+
+<!-- Typing indicator -->
+<div class="chat-msg" style="margin-top:1.5rem">
+<div class="chat-avatar user">VP</div>
+<div class="chat-bubble user-bubble">What's the single biggest risk I'm not seeing?<span class="cursor"></span></div>
+</div>
+<div class="chat-msg">
+<div class="chat-avatar ai">AI</div>
+<div class="chat-bubble ai-bubble" style="background:rgba(52,211,153,0.05);border-color:rgba(52,211,153,0.15)">
+<div class="ai-tag" style="background:rgba(52,211,153,0.15)">Thinking across layers</div>
+<span class="thinking-dots"><span></span><span></span><span></span></span>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- SECTION 8: INTERVENTION ENGINE -->
+<div class="container">
+<section id="actions">
+<div class="section-header">
+<div class="eyebrow">Intervention Engine</div>
+<h2>Ranked Actions & Predicted ROI</h2>
+<p>AI-prioritized interventions ranked by predicted ROI, urgency, and cross-layer evidence strength.</p>
+</div>
+
+<div class="intervention-grid fade-up">
+
+<div class="intervention">
+<div class="rank urgent">1</div>
+<div class="int-body">
+<h4>Fortis Account Rescue — Price Match + Executive Engagement</h4>
+<p>Match MedPlus on top 20 antibiotics. CFO Kavita to call Fortis Director. Dedicate logistics coordinator.</p>
+<div class="source-layers">Source: Layer 1 (Sun delivery) + Layer 3 (Account churn) + Layer 4 (MedPlus hiring)</div>
+</div>
+<div class="int-roi">
+<div class="roi-value">₹4.3Cr</div>
+<div class="roi-label">Revenue Protected</div>
+</div>
+<span class="urgency-badge critical">Critical</span>
+</div>
+
+<div class="intervention">
+<div class="rank urgent">2</div>
+<div class="int-body">
+<h4>Mankind Vendor Switch — Alternative Sourcing for Manforce/Prega News</h4>
+<p>Complete TTK Healthcare and HLL evaluation by May 12. WF private label pregnancy test in development.</p>
+<div class="source-layers">Source: Layer 1 (Vendor failure) + Layer 2 (Stockout data) + Layer 3 (TCS impact)</div>
+</div>
+<div class="int-roi">
+<div class="roi-value">₹2.2Cr</div>
+<div class="roi-label">Annual Revenue at Risk</div>
+</div>
+<span class="urgency-badge critical">Critical</span>
+</div>
+
+<div class="intervention">
+<div class="rank high">3</div>
+<div class="int-body">
+<h4>Cipla FY27 Exclusive Respiratory Partnership</h4>
+<p>Secure exclusive distribution for 3 new respiratory SKUs. Prepare volume commitment letter for ₹60Cr annual target.</p>
+<div class="source-layers">Source: Layer 1 (Cipla relationship) + Layer 2 (Respiratory +18% YoY) + Layer 4 (Apollo gap)</div>
+</div>
+<div class="int-roi">
+<div class="roi-value">₹5-8Cr</div>
+<div class="roi-label">New Annual Revenue</div>
+</div>
+<span class="urgency-badge high">High</span>
+</div>
+
+<div class="intervention">
+<div class="rank high">4</div>
+<div class="int-body">
+<h4>TCS Pune + Bengaluru Campus Expansion</h4>
+<p>Pune proposal submitted Apr 25. Bengaluru pitch with Suresh Nair in prep. Vendor co-marketing funds pooled.</p>
+<div class="source-layers">Source: Layer 3 (Account growth signal) + Layer 4 (Corporate wellness 22% CAGR)</div>
+</div>
+<div class="int-roi">
+<div class="roi-value">₹1.4-1.8Cr</div>
+<div class="roi-label">New Annual Revenue</div>
+</div>
+<span class="urgency-badge high">High</span>
+</div>
+
+<div class="intervention">
+<div class="rank high">5</div>
+<div class="int-body">
+<h4>Monsoon Stockout Prevention — Pre-Position Inventory</h4>
+<p>85K Azithromycin strips (Cipla) + 100K Cetirizine (DRL) + cross-store transfer protocol Goa→Mumbai.</p>
+<div class="source-layers">Source: Layer 1 (Vendor supply) + Layer 2 (Seasonal model) + Layer 3 (85 Mumbai stores)</div>
+</div>
+<div class="int-roi">
+<div class="roi-value">₹25L+</div>
+<div class="roi-label">Revenue Protected</div>
+</div>
+<span class="urgency-badge high">High</span>
+</div>
+
+<div class="intervention">
+<div class="rank medium">6</div>
+<div class="int-body">
+<h4>WF Essentials Private Label Launch — First 5 SKUs</h4>
+<p>Paracetamol, antacid, multivitamin, cough syrup, hand sanitizer. Cipla + Zydus contract manufacturing. 42% target margin.</p>
+<div class="source-layers">Source: Layer 1 (Vendor terms) + Layer 2 (Price sensitivity) + Layer 4 (Jan Aushadhi threat)</div>
+</div>
+<div class="int-roi">
+<div class="roi-value">₹12-15Cr</div>
+<div class="roi-label">Revenue by FY28</div>
+</div>
+<span class="urgency-badge medium">Medium</span>
+</div>
+
+<div class="intervention">
+<div class="rank medium">7</div>
+<div class="int-body">
+<h4>POS Cross-Sell Implementation — Top 10 Co-Purchase Pairings</h4>
+<p>Activate co-purchase prompts at checkout for insulin+strips, prenatal+iron, metformin+atorvastatin bundles.</p>
+<div class="source-layers">Source: Layer 2 (Co-purchase data) + Layer 3 (Store performance) + Layer 7 (Missed revenue)</div>
+</div>
+<div class="int-roi">
+<div class="roi-value">₹8.4Cr</div>
+<div class="roi-label">Annual Opportunity</div>
+</div>
+<span class="urgency-badge medium">Medium</span>
+</div>
+
+</div>
+</section>
+</div>
+
+<!-- CTA SECTION -->
+<div class="container">
+<section>
+<div class="cta-section">
+<h2>Your Data. Our Intelligence. 48-Hour Activation.</h2>
+<p>Deploy the full 4-layer intelligence architecture on your pharmacy chain's data within 48 hours.</p>
+
+<div class="data-req">
+<div class="data-req-item">
+<div class="req-label">Required</div>
+POS Transaction Data
+</div>
+<div class="data-req-item">
+<div class="req-label">Required</div>
+Vendor Purchase Orders
+</div>
+<div class="data-req-item">
+<div class="req-label">Required</div>
+Store Master & Inventory
+</div>
+<div class="data-req-item">
+<div class="req-label">Required</div>
+Account/Customer Records
+</div>
+<div class="data-req-item">
+<div class="req-label">Enhances</div>
+CRM & Communication Logs
+</div>
+<div class="data-req-item">
+<div class="req-label">Enhances</div>
+Vendor Correspondence
+</div>
+<div class="data-req-item">
+<div class="req-label">Enhances</div>
+Competitive Price Data
+</div>
+<div class="data-req-item">
+<div class="req-label">Enhances</div>
+Loyalty Program Data
+</div>
+</div>
+
+<a href="#" class="cta-btn">Schedule Intelligence Activation →</a>
+</div>
+</section>
+</div>
+
+<footer>
+<strong>Tasknova</strong> &mdash; Built by Tasknova Insight Framework &mdash; April 2026
+</footer>
+
+</body>
+</html>
