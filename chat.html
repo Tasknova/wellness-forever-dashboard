@@ -329,7 +329,8 @@
   </div>
 
   <script>
-    const API_BASE = 'http://localhost:8080';
+    const isLocalDev = window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const API_ENDPOINT = isLocalDev ? 'http://localhost:8080/ask' : '/api/ask';
     const chatArea = document.getElementById('chatArea');
     const questionInput = document.getElementById('questionInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -357,7 +358,7 @@
       const loadingId = addLoadingIndicator();
 
       try {
-        const response = await fetch(`${API_BASE}/ask`, {
+        const response = await fetch(API_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question })
